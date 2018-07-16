@@ -27,23 +27,25 @@ class GUI (QMainWindow):
         self.setCentralWidget(wid)
         
         # Main Layout
-        mainLayout = QVBoxLayout() 
+        #mainLayout = QVBoxLayout() 
         # QV = vertical box
         
         # Self plot panel
-        self.panel = QWidget()
-        layout = QVBoxLayout(self.panel)
+        #self.panel = QWidget()
+        #layout = QVBoxLayout(self.panel)
         
-        layout.addWidget(self.panel)
+        #layout.addWidget(self.panel)
         
         #add panel to main layout
-        mainLayout.addWidget(self.panel)
-        wid.setLayout(mainLayout)
+        #mainLayout.addWidget(self.panel)
+        #wid.setLayout(mainLayout)
         self.show()
     
 def main():
     app = QApplication(sys.argv)
-    # gui = GUI()
-    
+    gui = GUI()
+    screen_resolution = app.desktop().screenGeometry()
+    width = screen_resolution.width()
+    gui.setGeometry(width * 0.025, 0, width * 0.95, width * 0.45)
     sys.exit(app.exec_())
     
