@@ -36,7 +36,7 @@ class GUI(QMainWindow):
         plt = PLOT_UI()
         self.setCentralWidget(plt)
         #mainLayout = QVBoxLayout()
-        #plt.setLayout(mainLayout)        
+        #plt.setLayout(mainLayout)       
         self.show()
         
 class PLOT_UI(QWidget):
@@ -60,7 +60,6 @@ class PLOT_UI(QWidget):
         # Sets up layout
         layout = QVBoxLayout()
         layout.addWidget(self.toolbar)
-        self.toolbar.move('Bottom')
         layout.addWidget(self.canvas)
         layout.addWidget(self.button)
         self.setLayout(layout)
