@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import sys
 import numpy as np
 
@@ -52,15 +51,15 @@ class PLOT_UI(QWidget):
         # Creates a Canvas and Navigation Toolbar
         self.canvas = FigureCanvas(self.figure)
         self.toolbar = NavigationToolbar(self.canvas, self)
-        
+
         # Creates a button
         self.button = QPushButton('Plot')
         self.button.clicked.connect(self.plot)
-        
+                
         # Sets up layout
         layout = QVBoxLayout()
-        layout.addWidget(self.toolbar)
         layout.addWidget(self.canvas)
+        layout.addWidget(self.toolbar)
         layout.addWidget(self.button)
         self.setLayout(layout)
     
