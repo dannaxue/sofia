@@ -8,10 +8,10 @@ from astropy.io import fits
 from astroquery.skyview import SkyView
 import numpy as np
 
-class GLUE(QWidget):
+class PLOT_UI(QWidget):
     
     def __init__(self):
-        super(GLUE, self).__init__()
+        super(PLOT_UI, self).__init__()
         self.figure = Figure()
         self.initUI()
 
@@ -19,17 +19,17 @@ class GLUE(QWidget):
         """User interface."""
         
         layout = QHBoxLayout()
-        plot1 = PLOT_UI()
+        plot1 = IMAGE_PLOT()
         plot2 = CONTOUR_PLOT()
         layout.addWidget(plot1)
         layout.addWidget(plot2)
         self.setLayout(layout)
 
-class PLOT_UI(QWidget):
+class IMAGE_PLOT(QWidget):
 
     
     def __init__(self):
-        super(PLOT_UI, self).__init__()
+        super(IMAGE_PLOT, self).__init__()
         self.figure = Figure()
         self.initUI()
 

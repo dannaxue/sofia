@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 #changes
 
 #specify the library (sofia.plots)
-from sofia.plots import GLUE
+from sofia.plots import PLOT_UI
 
 class GUI(QMainWindow):
 
@@ -35,7 +35,7 @@ class GUI(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         
         #wid = QWidget()
-        plot = GLUE()
+        plot = PLOT_UI()
         self.setCentralWidget(plot)
         #mainLayout = QVBoxLayout()
         #plt.setLayout(mainLayout)       
