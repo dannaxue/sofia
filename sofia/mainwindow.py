@@ -1,20 +1,23 @@
 #!/usr/bin/env python
 import sys
-import numpy as np
+# import numpy as np
 
 #import os
-from PyQt5.QtWidgets import QDialog, QMainWindow, QWidget, QVBoxLayout, QApplication, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication
 
-from matplotlib.backends.backend_qt5agg import FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-from matplotlib.figure import Figure
-from matplotlib import cm
-from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d.axes3d import Axes3D
-
-import random
+#from matplotlib.backends.backend_qt5agg import FigureCanvas
+#from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+#from matplotlib.figure import Figure
+# from matplotlib import cm
+# from matplotlib import pyplot as plt
+#from astropy.wcs import WCS
+#from astropy.utils.data import download_file
+#from astropy.io import fits
 # from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 #changes
+
+#specify the library (sofia.plots)
+from sofia.plots import PLOT_UI
 
 class GUI(QMainWindow):
 
@@ -32,44 +35,11 @@ class GUI(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         
         #wid = QWidget()
-        plt = PLOT_UI()
-        self.setCentralWidget(plt)
+        plot = PLOT_UI()
+        self.setCentralWidget(plot)
         #mainLayout = QVBoxLayout()
         #plt.setLayout(mainLayout)       
         self.show()
-        
-class PLOT_UI(QWidget):
-    
-    def __init__(self):
-        super(PLOT_UI, self).__init__()
-        self.figure = Figure()
-        self.initUI()
-
-    def initUI(self):
-        """User interface."""
-        
-        # Creates a Canvas and Navigation Toolbar
-        self.canvas = FigureCanvas(self.figure)
-        self.toolbar = NavigationToolbar(self.canvas, self)
-
-        # Creates a button
-        self.button = QPushButton('Plot')
-        self.button.clicked.connect(self.plot)
-                
-        # Sets up layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.canvas)
-        layout.addWidget(self.toolbar)
-        layout.addWidget(self.button)
-        self.setLayout(layout)
-    
-    # Plots data
-    def plot(self):
-        data = [random.random() for i in range(10)]
-        ax = self.figure.add_subplot(111)
-        ax.clear()
-        ax.plot(data, '*-')
-        self.canvas.draw()
 
 def main():
     app = QApplication(sys.argv)

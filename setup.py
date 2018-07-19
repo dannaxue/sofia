@@ -5,7 +5,7 @@ from setuptools import setup
 
 config = {
     'name': 'sofia',
-    'version': '1',
+    'version': '0.0.1',
     'description': 'GUI',
     'author': 'Danna Xue',
     'author email': 'dannaxue@stanford.edu',
