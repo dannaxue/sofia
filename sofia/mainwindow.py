@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QInputDialog, QToolButton
+from PyQt5.QtGui import QIcon
 from sofia.plots import PLOT_UI
 
 class GUI(QMainWindow):
@@ -13,14 +14,24 @@ class GUI(QMainWindow):
         self.width = 500
         self.height = 500
         self.initUI()
-    
+        
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        
         plot = PLOT_UI()
-        self.setCentralWidget(plot)   
+        #build toolbar
+        importImage = QAction(QIcon('doggo.png'), 'Import', self)
+        importImage.setShortcut('Ctrl+I')
+        importImage.setStatusTip('Import an image for analysis')
+        importImage.triggered.connect(self.imageUploadEvent)
+        
+        self.toolbar = self.addToolBar('Toolbar')
+        self.toolbar.addAction(importImage)
+        self.setCentralWidget(plot)
         self.show()
+        
+    def imageUploadEvent(self, importImage):
+        filename, ok = QInputDialog.getText(self, 'Image Upload', 'Enter image file name:')
 
 def main():
     app = QApplication(sys.argv)
