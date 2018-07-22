@@ -110,3 +110,26 @@ class CONTOUR_PLOT(QWidget):
         ax.set_xlabel('RA')
         ax.set_ylabel('Dec')
         self.canvas.draw()
+
+
+#Start plotting data here, within the framework already given by PLOT_UI and CONTOUR_PLOT
+# class PLOTTING():
+    
+    # def __init__(self):
+        # super(PLOTTING, self).__init__()
+        # self.initGraph()
+    
+    # def initGraph(self):
+        # here I will set up the functions to initialize the actual image plotting/graphing
+        # read in the filename, and get the variable for the filename/image address
+        # everytime imageUpload is called
+        
+        # Steps:
+        # 1. Clear plot
+        # 2. Read in filename
+        # 3. Get data, label axes, perform designated functions
+        # 4. self.canvas.draw()
+        # 5. Remember to do one for plot 1 and one for plot 2
+        
+        # Learn how to be able to access the graphs defined in earlier functions
+    

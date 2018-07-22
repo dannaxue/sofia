@@ -2,7 +2,7 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QInputDialog, QToolButton
 from PyQt5.QtGui import QIcon
-from sofia.plots import PLOT_UI
+from sofia.plots import PLOT_UI, IMAGE_PLOT
 
 class GUI(QMainWindow):
 
@@ -32,6 +32,7 @@ class GUI(QMainWindow):
         
     def imageUploadEvent(self, importImage):
         filename, ok = QInputDialog.getText(self, 'Image Upload', 'Enter image file name:')
+        #IMAGE_PLOT(filename)
 
 def main():
     app = QApplication(sys.argv)
