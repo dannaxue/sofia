@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QInputDialog, QToolButton
+import os
+from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QInputDialog
 from PyQt5.QtGui import QIcon
-from sofia.plots import PLOT_UI, IMAGE_PLOT
+from sofia.plots import PLOT_UI, IMAGE_PLOT, CONTOUR_PLOT
 
 class GUI(QMainWindow):
 
@@ -13,26 +14,28 @@ class GUI(QMainWindow):
         self.top = 20
         self.width = 500
         self.height = 500
+        self.path0, file0 = os.path.split(__file__)
         self.initUI()
         
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        plot = PLOT_UI()
+        self.plot = PLOT_UI()
         #build toolbar
-        importImage = QAction(QIcon('doggo.png'), 'Import', self)
+        importImage = QAction(QIcon(self.path0 + '/icons/doggo.png'), 'Import', self)
         importImage.setShortcut('Ctrl+I')
         importImage.setStatusTip('Import an image for analysis')
         importImage.triggered.connect(self.imageUploadEvent)
         
         self.toolbar = self.addToolBar('Toolbar')
         self.toolbar.addAction(importImage)
-        self.setCentralWidget(plot)
+        self.setCentralWidget(self.plot)
         self.show()
         
     def imageUploadEvent(self, importImage):
         filename, ok = QInputDialog.getText(self, 'Image Upload', 'Enter image file name:')
-        #IMAGE_PLOT(filename)
+        self.plot.plot1.filename = filename
+        self.plot.plot2.filename = filename
 
 def main():
     app = QApplication(sys.argv)
