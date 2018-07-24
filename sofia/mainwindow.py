@@ -33,14 +33,20 @@ class GUI(QMainWindow):
         importImage.setStatusTip('Import an image for analysis')
         importImage.triggered.connect(self.imageUploadEvent)
         
-        openFile = QAction(QIcon('open.png'), 'Open', self)
+        quitter = QAction(QIcon(self.path0 + '/icons/doggo.png'), 'Quit', self)
+        quitter.setShortcut('Ctrl+Q')
+        quitter.setStatusTip('Import an image for analysis')
+        quitter.triggered.connect(self.close)
+        
+        openFile = QAction(QIcon('open.png'), 'Open File', self)
         openFile.setShortcut('Ctrl+O')
         openFile.setStatusTip('Open new File')
         openFile.triggered.connect(self.showDialog)
 
         menubar = self.menuBar()
-        fileMenu = menubar.addMenu('&Import Image')
+        fileMenu = menubar.addMenu('&Options')
         fileMenu.addAction(openFile)   
+        fileMenu.addAction(quitter)
         self.toolbar = self.addToolBar('Toolbar')
         self.toolbar.addAction(importImage)
         self.setCentralWidget(self.plot)
@@ -49,9 +55,6 @@ class GUI(QMainWindow):
     def imageUploadEvent(self, importImage):
 
         filename, ok = QInputDialog.getText(self, 'Image Upload', 'Enter image file name:')
-        self.plot = QPushButton('Plot')
-        self.plot.clicked.connect(self.showDialog)
-        
         self.plot.plot1.filename = filename
         self.plot.plot2.filename = filename
         
