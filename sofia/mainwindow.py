@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import os
-from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QPushButton, QFileDialog, QInputDialog
+from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QFileDialog, QDialog, QInputDialog, QMessageBox
 from PyQt5.QtGui import QIcon
 from sofia.plots import PLOT_UI
 
@@ -24,40 +24,77 @@ class GUI(QMainWindow):
         self.initUI()
         
     def initUI(self):
+        
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.plot = PLOT_UI()
-        #build toolbar
-        importImage = QAction(QIcon(self.path0 + '/icons/doggo.png'), 'Import', self)
+        
+        # import image function
+        importImage = QAction(QIcon(self.path0 + '/icons/img.png'), 'Import', self)
         importImage.setShortcut('Ctrl+I')
         importImage.setStatusTip('Import an image for analysis')
         importImage.triggered.connect(self.imageUploadEvent)
         
-        quitter = QAction(QIcon(self.path0 + '/icons/doggo.png'), 'Quit', self)
+        # quit function
+        quitter = QAction(QIcon(self.path0 + '/icons/cancel.png'), 'Quit', self)
         quitter.setShortcut('Ctrl+Q')
-        quitter.setStatusTip('Import an image for analysis')
+        quitter.setStatusTip('Quit')
         quitter.triggered.connect(self.close)
         
-        openFile = QAction(QIcon('open.png'), 'Open File', self)
+        # open file function
+        openFile = QAction(QIcon(self.path0 + '/icons/openfile.png'), 'File', self)
         openFile.setShortcut('Ctrl+O')
         openFile.setStatusTip('Open new File')
         openFile.triggered.connect(self.showDialog)
+        
+        # save file function
+        saveFile = QAction(QIcon(self.path0 + '/icons/saver.png'), '&Save File', self)
+        saveFile.setShortcut('Ctrl+S')
+        saveFile.setStatusTip('Save File')
+        saveFile.triggered.connect(self.file_save)
 
+        # make a menubar
         menubar = self.menuBar()
+        menubar.setNativeMenuBar(False)
         fileMenu = menubar.addMenu('&Options')
+        
+        # add actions to menubar
         fileMenu.addAction(openFile)   
         fileMenu.addAction(quitter)
+        fileMenu.addAction(saveFile)
+ 
+        importMenu = menubar.addMenu('Import')
+        importMenu.addAction(importImage)
+        
+        # make toolbar
         self.toolbar = self.addToolBar('Toolbar')
+        
+        # add functions to toolbar
+        self.toolbar.addAction(saveFile)
+        self.toolbar.addAction(quitter)
         self.toolbar.addAction(importImage)
+        self.toolbar.addAction(openFile)
+        
+        # make plot the central Widget
         self.setCentralWidget(self.plot)
         self.show()
-        
-    def imageUploadEvent(self, importImage):
 
-        filename, ok = QInputDialog.getText(self, 'Image Upload', 'Enter image file name:')
+    # To-do: Fix file function
+    def file_save(self):
+        name, _ = QFileDialog.getSaveFileName(self, 'Save File', options=QFileDialog.DontUseNativeDialog)
+        file = open(name, 'w')
+        text = file.read()
+        file.write(text)
+        file.close()
+        
+    # Gets image URL, passes to plots
+    def imageUploadEvent(self, importImage):
+        filename, ok = QInputDialog.getText(self, 'Image Upload', 'Enter image file URL:')
+        
         self.plot.plot1.filename = filename
         self.plot.plot2.filename = filename
         
+    # Makes Directory pop up, to help with searching for an image file
     def showDialog(self):
 
         fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')
@@ -67,8 +104,8 @@ class GUI(QMainWindow):
 
             with f:
                 data = f.read()
-                self.textEdit.setText(data)
-
+                self.textEdit.setText(data)   
+            
 def main():
     app = QApplication(sys.argv)
     gui = GUI()
