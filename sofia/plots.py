@@ -1,12 +1,7 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QMainWindow
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton
 from matplotlib.backends.backend_qt5agg import FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
-from astropy.wcs import WCS
-from astropy.utils.data import download_file
-from astropy.io import fits
-from astroquery.skyview import SkyView
-import numpy as np
 from sofia.plotter import plotImage, plotContour
 
 class PLOT_UI(QWidget):
