@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import os
-from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QFileDialog, QDialog, QInputDialog, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QFileDialog, QInputDialog
 from PyQt5.QtGui import QIcon
 from sofia.plots import PLOT_UI
 
