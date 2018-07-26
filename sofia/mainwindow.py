@@ -48,7 +48,10 @@ class GUI(QMainWindow):
         openFile.triggered.connect(self.showDialog)
         
         # save file function
-        saveFile = QAction(QIcon(self.path0 + '/icons/saver.png'), '&Save File', self)
+        icon = os.path.join(self.path0, 'icons', 'saver.png')
+        # makes importing image Unix independent, executable on all systems
+        saveFile = QAction(QIcon(icon), '&Save File', self)
+        # save as a png file, figsave
         saveFile.setShortcut('Ctrl+S')
         saveFile.setStatusTip('Save File')
         saveFile.triggered.connect(self.file_save)
@@ -106,6 +109,9 @@ class GUI(QMainWindow):
                 data = f.read()
                 self.textEdit.setText(data)   
             
+            
+#self.hsplitter = QSplitter(Qt.Horizontal)
+
 def main():
     app = QApplication(sys.argv)
     gui = GUI()
